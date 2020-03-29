@@ -1,13 +1,17 @@
 import "reflect-metadata";
 import { createConnection, createConnections, getConnection, getRepository, getConnectionOptions } from "typeorm";
-import { Users } from "./entity/mssql/secondDB";
+import { Users } from "./entity/ms-sql/users";
 import { Profile } from "./entity/pg/profile";
-import { Photo } from "./entity/mongo/thirdDB";
+import { Photo } from "./entity/mongo/photo";
 import { getMongoManager, getMongoRepository, MssqlParameter } from "typeorm";
 import { type } from "os";
 
 
-export class DataBaseConfig {
+class DataBaseConfig {
+    
+    constructor(){
+
+    }
     public CreateConnection(testinsert: boolean) {
         // read connection options from ormconfig file (or ENV variables)
         try {
@@ -132,3 +136,6 @@ class DataBaseArray {
         }
     }
 }
+
+
+export default DataBaseConfig;
