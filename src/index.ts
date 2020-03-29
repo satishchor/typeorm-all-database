@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { createConnection, createConnections, getConnection, getRepository, getConnectionOptions } from "typeorm";
-import { Users } from "./entity/ms-sql/users";
-import { Profile } from "./entity/pg/profile";
+import { TestUsers } from "./entity/ms-sql/testusers";
+import { TestProfile } from "./entity/pg/profile";
 import { Photo } from "./entity/mongo/photo";
 import { getMongoManager, getMongoRepository, MssqlParameter } from "typeorm";
 import { type } from "os";
@@ -42,7 +42,7 @@ class DataBaseConfig {
                     });
 
                     console.log('MS-SQL');
-                    const user1 = new Users();
+                    const user1 = new TestUsers();
                     user1.firstName = "Satish";
                     user1.lastName = "Choraghe";
                     await connection[2].manager.save(user1).then(aa => {
@@ -121,7 +121,7 @@ class DataBaseArray {
                 });
 
                 console.log('MS-SQL');
-                const user1 = new Users();
+                const user1 = new TestUsers();
                 user1.firstName = "Satish";
                 user1.lastName = "Choraghe";
                 await connection[2].manager.save(user1).then(aa => {

@@ -1,7 +1,7 @@
 import { getRepository, getConnection, createConnection } from 'typeorm';
 import { Profile } from '../entity/pg/profile';
 import { Photo } from '../entity/mongo/photo';
-import { Users } from '../entity/ms-sql/users';
+import { Users } from '../entity/ms-sql/testusers';
 
 import * as express from 'express';
 import Controller from '../interfaces/controller.interface';
