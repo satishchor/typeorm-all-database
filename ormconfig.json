@@ -1,24 +1,77 @@
-{
-   "type": "postgres",
-   "host": "localhost",
-   "port": 5432,
-   "username": "postgres",
-   "password": "Satish@1234",
-   "database": "postgres",
-   "synchronize": true,
-   "logging": false,
-   "entities": [
-      "src/entity/**/*.ts"
-   ],
-   "migrations": [
-      "src/migration/**/*.ts"
-   ],
-   "subscribers": [
-      "src/subscriber/**/*.ts"
-   ],
-   "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
+[
+   {
+      "name": "mongocon_uat",
+      "type": "mongodb",
+      "host": "localhost",
+      "port": 8015,
+      "username": "Satish",
+      "password": "Satish#1234",
+      "database": "satishdb",
+      "synchronize": false,
+      "logging": false,
+      "entities": [
+         "src/entity/mongo/*{.js,.ts}"
+      ],
+      "migrations": [
+         "src/migration/mongo/**/*.ts"
+      ],
+      "subscribers": [
+         "src/subscriber/mongo/**/*.ts"
+      ],
+      "cli": {
+         "entitiesDir": "src/entity/mongo",
+         "migrationsDir": "src/migration/mongo",
+         "subscribersDir": "src/subscriber/mongo"
+      }
+   },
+   {
+      "name": "postgres_uat",
+      "type": "postgres",
+      "host": "localhost",
+      "port": 5432,
+      "username": "postgres",
+      "password": "Satish@1234",
+      "database": "postgres",
+      "synchronize": false,
+      "logging": false,
+      "entities": [
+         "src/entity/pg/*{.js,.ts}"
+      ],
+      "migrations": [
+         "src/migration/pg/**/*.ts"
+      ],
+      "subscribers": [
+         "src/subscriber/pg/**/*.ts"
+      ],
+      "cli": {
+         "entitiesDir": "src/entity/pg",
+         "migrationsDir": "src/migration/pg",
+         "subscribersDir": "src/subscriber/pg"
+      }
+   },
+   {
+      "name": "mssql_uat",
+      "type": "mssql",
+      "host": "CHORGHE-PC",
+      "port": 1433,
+      "username": "satish",
+      "password": "Satish#1234",
+      "database": "MY_DEV",
+      "synchronize": false,
+      "logging": false,
+      "entities": [
+         "src/entity/mssql/*{.js,.ts}"
+      ],
+      "migrations": [
+         "src/migration/mssql/**/*.ts"
+      ],
+      "subscribers": [
+         "src/subscriber/mssql/**/*.ts"
+      ],
+      "cli": {
+         "entitiesDir": "src/entity/mssql",
+         "migrationsDir": "src/migration/mssql",
+         "subscribersDir": "src/subscriber/mssql"
+      }
    }
-}
+]

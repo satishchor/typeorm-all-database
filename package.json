@@ -8,6 +8,7 @@
       "typescript": "3.3.3333"
    },
    "dependencies": {
+      "express": "^4.17.1",
       "guid-typescript": "^1.0.9",
       "mongodb": "^3.5.5",
       "mssql": "^6.2.0",
@@ -18,6 +19,6 @@
       "uuid": "^7.0.2"
    },
    "scripts": {
-      "start": "ts-node src/index.ts"
+      "dev": "nodemon --config nodemon.json"
    }
 }

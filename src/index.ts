@@ -1,11 +1,60 @@
 import "reflect-metadata";
-import { createConnection, createConnections, getConnection, getRepository } from "typeorm";
-import { Users } from "./entity/SQL/secondDB";
-import { Profile } from "./entity/PG/profile";
-import { Photo } from "./entity/MONGO/thirdDB";
+import { createConnection, createConnections, getConnection, getRepository, getConnectionOptions } from "typeorm";
+import { Users } from "./entity/mssql/secondDB";
+import { Profile } from "./entity/pg/profile";
+import { Photo } from "./entity/mongo/thirdDB";
 import { getMongoManager, getMongoRepository, MssqlParameter } from "typeorm";
+import { type } from "os";
 
-class DataBase {
+
+export class DataBaseConfig {
+    public CreateConnection(testinsert: boolean) {
+        // read connection options from ormconfig file (or ENV variables)
+        try {
+
+            console.log('Connecting Databases..');
+            const connections = createConnections();
+
+            //Sample Testing Insert Operations
+            if (testinsert) {
+                connections.then(async connection => {
+
+                    console.log('MONGO');
+                    const manager2 = getMongoRepository(Photo, 'mongocon_uat');
+                    const timber1 = await manager2.insertMany([{
+                        URL: "About Trees and Me",
+                    }]).then(aa => {
+                        console.log(aa);
+                    });
+
+                    console.log('PG');
+                    const profile = new Profile();
+                    profile._id = 0;
+                    profile.about = 'Satish';
+                    profile.career = 'SE';
+                    profile.education = 'BSC';
+                    await connection[1].manager.save(profile).then(aa => {
+                        console.log(aa);
+                    });
+
+                    console.log('MS-SQL');
+                    const user1 = new Users();
+                    user1.firstName = "Satish";
+                    user1.lastName = "Choraghe";
+                    await connection[2].manager.save(user1).then(aa => {
+                        console.log(aa);
+                    });
+
+                }).catch(error => console.log(error));
+            }
+
+        } catch (Error) {
+            console.log(Error);
+        }
+    }
+}
+
+class DataBaseArray {
 
     public CreateConnection() {
         try {
@@ -83,7 +132,3 @@ class DataBase {
         }
     }
 }
-
-
-var executes = new DataBase();
-executes.CreateConnection();

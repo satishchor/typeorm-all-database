@@ -1,5 +1,4 @@
 import {Entity, PrimaryGeneratedColumn, ObjectID, ObjectIdColumn, Column} from "typeorm";
-import { Guid } from "guid-typescript";
 
 @Entity()
 export class Profile {
