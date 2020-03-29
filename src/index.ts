@@ -15,7 +15,7 @@ class DataBaseConfig {
     public CreateConnection(testinsert: boolean) {
         // read connection options from ormconfig file (or ENV variables)
         try {
-
+ 
             console.log('Connecting Databases..');
             const connections = createConnections();
 
@@ -41,7 +41,7 @@ class DataBaseConfig {
                         console.log(aa);
                     });
 
-                    console.log('MS-SQL');
+                    console.log('MS-SQL1');
                     const user1 = new TestUsers();
                     user1.firstName = "Satish";
                     user1.lastName = "Choraghe";

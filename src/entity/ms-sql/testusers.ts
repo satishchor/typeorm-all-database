@@ -6,10 +6,10 @@ export class TestUsers {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ name: 'FirstName' })
     firstName: string;
-
-    @Column()
+ 
+    @Column({ name: 'LastName' })
     lastName: string;
 
 }

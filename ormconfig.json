@@ -7,7 +7,7 @@
       "username": "",
       "password": "",
       "database": "satishdb",
-      "synchronize": false,
+      "synchronize": true,
       "logging": false,
       "entities": [
          "src/entity/mongo/*{.js,.ts}"
@@ -32,7 +32,7 @@
       "username": "postgres",
       "password": "Satish@1234",
       "database": "postgres",
-      "synchronize": false,
+      "synchronize": true,
       "logging": false,
       "entities": [
          "src/entity/pg/*{.js,.ts}"
@@ -57,21 +57,21 @@
       "username": "satish",
       "password": "Satish#1234",
       "database": "MY_DEV",
-      "synchronize": false,
+      "synchronize": true,
       "logging": false,
       "entities": [
-         "src/entity/mssql/*{.js,.ts}"
+         "src/entity/ms-sql/*{.js,.ts}"
       ],
       "migrations": [
-         "src/migration/mssql/**/*.ts"
+         "src/migration/ms-sql/**/*.ts"
       ],
       "subscribers": [
-         "src/subscriber/mssql/**/*.ts"
+         "src/subscriber/ms-sql/**/*.ts"
       ],
       "cli": {
-         "entitiesDir": "src/entity/mssql",
-         "migrationsDir": "src/migration/mssql",
-         "subscribersDir": "src/subscriber/mssql"
+         "entitiesDir": "src/entity/ms-sql",
+         "migrationsDir": "src/migration/ms-sql",
+         "subscribersDir": "src/subscriber/ms-sql"
       }
    }
 ]

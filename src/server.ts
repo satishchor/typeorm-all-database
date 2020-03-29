@@ -8,7 +8,7 @@ var app = new GlobalApp(
     ]);
 
  var data = new DataBaseConfig();
- data.CreateConnection(false);
+ data.CreateConnection(true);
  
 app.listenApp();
 
