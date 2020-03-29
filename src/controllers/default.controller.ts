@@ -1,7 +1,7 @@
 import { getRepository, getConnection, createConnection } from 'typeorm';
-import { Profile } from '../entity/pg/profile';
+import { TestProfile } from '../entity/pg/profile';
 import { Photo } from '../entity/mongo/photo';
-import { Users } from '../entity/ms-sql/testusers';
+import { TestUsers } from '../entity/ms-sql/testusers';
 
 import * as express from 'express';
 import Controller from '../interfaces/controller.interface';
@@ -29,17 +29,17 @@ class DefaultController implements Controller {
     private getPGData = (req: express.Request, res: express.Response) => {
         const pgconnections = getConnection("postgres_uat");
 
-        pgconnections.getRepository(Profile)
-            .createQueryBuilder('Profile')
-            .select('Profile.about')
-            .groupBy('Profile.about')
+        pgconnections.getRepository(TestProfile)
+            .createQueryBuilder('TestProfile')
+            .select('TestProfile.about')
+            .groupBy('TestProfile.about')
             .getRawMany().then(data => {
                 console.log(data);
             });;
 
         var about = "Satish";
         var career = "SE";
-        var query = `SELECT * from profile where about= $1 and career= $2 `;
+        var query = `SELECT * from TestProfile where about= $1 and career= $2 `;
         var skuData = pgconnections.query(query, [about, career]);
         skuData.then(data => {
             res.send({ data: data });
@@ -57,13 +57,13 @@ class DefaultController implements Controller {
     private getSQLData = (req: express.Request, res: express.Response) => {
         const sqlconnections = getConnection('mssql_uat');
 
-        sqlconnections.manager.find(Users, { firstName: 'Satish' }).then(aa => {
+        sqlconnections.manager.find(TestUsers, { firstName: 'Satish' }).then(aa => {
             console.log(aa);
         });
 
         var firstName = "Satish";
         var lastName = "Choraghe";
-        var query = `SELECT * from Users where firstName= @0 and lastName= @1 `;
+        var query = `SELECT * from TestUsers where firstName= @0 and lastName= @1 `;
 
         var skuData = sqlconnections.query(query, ['Satish', 'Choraghe']);
         skuData.then(aa => {

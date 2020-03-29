@@ -32,7 +32,7 @@ class DataBaseConfig {
                     });
 
                     console.log('PG');
-                    const profile = new Profile();
+                    const profile = new TestProfile();
                     profile._id = 0;
                     profile.about = 'Satish';
                     profile.career = 'SE';
@@ -102,7 +102,7 @@ class DataBaseArray {
             connections.then(async connection => {
 
                 console.log('PG');
-                const profile = new Profile();
+                const profile = new TestProfile();
                 profile._id = 0;
                 profile.about = 'Satish';
                 profile.career = 'SE';
