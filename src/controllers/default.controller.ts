@@ -1,7 +1,12 @@
 import { getRepository, getConnection, createConnection } from 'typeorm';
+import * as alasql1 from 'alasql';
+var alasql = require('alasql');
+
 import { TestProfile } from '../entity/pg/profile';
 import { Photo } from '../entity/mongo/photo';
 import { TestUsers } from '../entity/ms-sql/testusers';
+import { Example } from '../entity/my-sql/example';
+import PersonModel from '../models/Person.model';
 
 import * as express from 'express';
 import Controller from '../interfaces/controller.interface';
@@ -9,7 +14,7 @@ import Controller from '../interfaces/controller.interface';
 class DefaultController implements Controller {
 
     path: string = '/default';
-
+    private Person = PersonModel;
     router: express.Router = express.Router();
     constructor() {
         this.initialiseRoutes();
@@ -17,19 +22,71 @@ class DefaultController implements Controller {
 
     initialiseRoutes(): any {
         this.router.get(`${this.path}/testapi`, this.getDefaultData)
+        this.router.get(`${this.path}/getmongoose`, this.getMongoose)
         this.router.get(`${this.path}/getpgdata`, this.getPGData)
         this.router.get(`${this.path}/getmongodata`, this.getMongoData)
         this.router.get(`${this.path}/getmssqldata`, this.getSQLData)
+        this.router.get(`${this.path}/getmysqldata`, this.getMySQLData)
     }
-
-    private getDefaultData = (req: express.Request, res: express.Response) => {
-        res.send({ data: '1' });
+    private getMongoose = async (req: express.Request, res: express.Response) => {
+        this.Person.find().then(data => {
+            res.send(data);
+        }
+        );
     };
 
-    private getPGData = (req: express.Request, res: express.Response) => {
+    private getDefaultData = async (req: express.Request, res: express.Response) => {
+        try {
+
+            // alasql('=2*3', 1, 23, 4, 5);
+            res.send({ data: '1' });
+            // Good test  
+            // Bad test 
+            // This combination should generate type error
+
+        }
+        catch (e) {
+            res.send((e as Error).message);
+        }
+
+    };
+
+    private getMySQLData = async (req: express.Request, res: express.Response) => {
+        const mysqlconnections = getConnection("mysql_uat");
+
+        console.log('Calling My Sql data');
+
+
+        console.log('MY-SQL');
+        const example = new Example();
+        example.firstName = "Komal";
+        example.lastName = "Bhilare";
+        await mysqlconnections.manager.save(example).then(aa => {
+            console.log(aa);
+        });
+
+        await mysqlconnections.getRepository(Example)
+            .createQueryBuilder('exampledata')
+            .select('exampledata.name')
+            .getRawMany().then(data => {
+                console.log(data);
+
+            });;
+
+
+        var about = "Satish";
+        var career = "SE";
+        var query = `SELECT * from example`;
+        var skuData = mysqlconnections.query(query);
+        await skuData.then(data => {
+            res.send({ data: data });
+        })
+    };
+
+    private getPGData = async (req: express.Request, res: express.Response) => {
         const pgconnections = getConnection("postgres_uat");
 
-        pgconnections.getRepository(TestProfile)
+        await pgconnections.getRepository(TestProfile)
             .createQueryBuilder('TestProfile')
             .select('TestProfile.about')
             .groupBy('TestProfile.about')
@@ -41,23 +98,23 @@ class DefaultController implements Controller {
         var career = "SE";
         var query = `SELECT * from TestProfile where about= $1 and career= $2 `;
         var skuData = pgconnections.query(query, [about, career]);
-        skuData.then(data => {
+        await skuData.then(data => {
             res.send({ data: data });
         })
     };
 
-    private getMongoData = (req: express.Request, res: express.Response) => {
+    private getMongoData = async (req: express.Request, res: express.Response) => {
         const mongoconnections = getConnection('mongocon_uat');
 
-        mongoconnections.manager.findOne(Photo, { URL: 'About Trees and Me' }).then(aa => {
+        await mongoconnections.manager.findOne(Photo, { URL: 'About Trees and Me' }).then(aa => {
             res.send({ data: aa });
         });
     };
 
-    private getSQLData = (req: express.Request, res: express.Response) => {
+    private getSQLData = async (req: express.Request, res: express.Response) => {
         const sqlconnections = getConnection('mssql_uat');
 
-        sqlconnections.manager.find(TestUsers, { firstName: 'Satish' }).then(aa => {
+        await sqlconnections.manager.find(TestUsers, { firstName: 'Satish' }).then(aa => {
             console.log(aa);
         });
 

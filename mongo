@@ -1,0 +1,33 @@
+
+Replica Set Creation
+
+C:\Program Files\MongoDB\Server\4.2\bin
+
+mongod --dbpath "C:\Program Files\MongoDB\Server\4.2\data" --logpath "C:\Program Files\MongoDB\Server\4.2\log\mongo.log" --port 27017 --storageEngine=wiredTiger --journal --replSet r2cip
+
+mongod --dbpath "C:\data1\data" --logpath "C:\data1\log\mongo.log" --port 27020 --storageEngine=wiredTiger --journal --replSet r2cip
+
+mongod --dbpath "C:\data2\data" --logpath "C:\data2\log\mongo.log" --port 27021 --storageEngine=wiredTiger --journal --replSet r2cip
+
+rsconf={_id:"r2cip",members:[{id:0, host: "localhost:27017"}]}
+
+rs.initiate(rsconf)
+
+show dbs
+
+rs.add("localhost:27020")
+ 
+rs.status()
+
+
+go to bith path
+mongo --port 27020
+show dbs
+rs.slaveOk()
+show dbs
+rs.isMaster()
+
+
+mongod --bind_ip localhost,ipaddress
+
+https://mongoosejs.com/docs/connections.html

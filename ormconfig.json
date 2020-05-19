@@ -7,7 +7,7 @@
       "username": "",
       "password": "",
       "database": "satishdb",
-      "synchronize": true,
+      "synchronize": false,
       "logging": false,
       "entities": [
          "src/entity/mongo/*{.js,.ts}"
@@ -32,7 +32,7 @@
       "username": "postgres",
       "password": "Satish@1234",
       "database": "postgres",
-      "synchronize": true,
+      "synchronize": false,
       "logging": false,
       "entities": [
          "src/entity/pg/*{.js,.ts}"
@@ -57,7 +57,7 @@
       "username": "satish",
       "password": "Satish#1234",
       "database": "MY_DEV",
-      "synchronize": true,
+      "synchronize": false,
       "logging": false,
       "entities": [
          "src/entity/ms-sql/*{.js,.ts}"

@@ -10,5 +10,5 @@ var app = new GlobalApp(
  var data = new DataBaseConfig();
  data.CreateConnection(true);
  
-app.listenApp();
+// app.listenApp();
 
