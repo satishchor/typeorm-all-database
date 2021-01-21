@@ -33,7 +33,7 @@
       "nodemon": "^2.0.2",
       "pg": "^7.18.2",
       "reflect-metadata": "^0.1.13",
-      "socket.io": "^2.3.0",
+      "socket.io": "^2.4.0",
       "typeorm": "^0.2.24",
       "uuid": "^7.0.2"
    },
